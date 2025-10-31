@@ -1,11 +1,8 @@
-import React from 'react'
-
-function page() {
+import StudentDataCard from "@/components/studentDataCard";
+const page = () => {
+  const assesments = ["Chemistry: Pending", "Physics: 1/4"];
   return (
-    <div>
-      main page
-      
-    </div>
+    <StudentDataCard title="Assesment Status" body={assesments} cardStyle="m-5" />
   )
 }
 

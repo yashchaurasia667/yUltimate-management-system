@@ -6,15 +6,15 @@ import { ClerkProvider,SignedIn } from "@clerk/nextjs";
 import Navbar from "@/components/navbar";
 
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "yutlimate",
@@ -31,7 +31,6 @@ export default function RootLayout({
       <html lang="en">
         <body >
           <Navbar/>
- 
         {children}</body>
       </html>
     </ClerkProvider>

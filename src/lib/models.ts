@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 export const studentDetails = new mongoose.Schema({
+  approved: {
+    type: Boolean,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -29,6 +33,10 @@ export const studentDetails = new mongoose.Schema({
 export const studentModel = mongoose.model("Student", studentDetails);
 
 export const coachDetails = new mongoose.Schema({
+  approved: {
+    type: Boolean,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

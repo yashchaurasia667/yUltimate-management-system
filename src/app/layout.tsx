@@ -28,12 +28,12 @@ export default function RootLayout({
 }>) {
   return (
       <ClerkProvider>
-      <html lang="en">
-        <body >
-          <Navbar/>
- 
-        {children}</body>
-      </html>
+        <html lang="en">
+          <body>
+            <Navbar/>
+  
+          {children}</body>
+        </html>
     </ClerkProvider>
 
   );

@@ -20,7 +20,11 @@ const rdr =()=>{
 
 function navbar() {
   return (
-    <div className='flex flex-row sticky top-0    items-end justify-end gap-10 bg-black/30 backdrop-blur-xl  p-0 '>
+    <div className='flex flex-row sticky top-0  h-[100px]   items-end justify-between  bg-[#B95F83] p-0 '>
+        <div className='mb-4'>
+            <Image src='/Logo.png' alt='image' height={70} width={70}></Image>
+
+        </div>
       
        
     
@@ -28,13 +32,28 @@ function navbar() {
         
            <SignedOut >
                 <SignInButton>
-                    <button className='bg-white text-black mt-0.5 p-2 rounded-sm mr-1.5  mb-3.5 font-mono hover:bg-gray-400'>Login</button>
+                    <button className='bg-white text-black  p-2 rounded-sm mr-1.5  mb-4 font-mono hover:bg-gray-400'>Login</button>
                 </SignInButton>
             </SignedOut> 
            
 
             <SignedIn>
-                <UserButton  />
+                <div className='h-[30px] mb-7'>
+                    <UserButton appearance={{
+                        elements: {
+                        userButtonAvatarBox: {
+                            width: '48px',
+                            height: '48px',
+                        },
+                        userButtonAvatarImage: {
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '8px', // optional: round or square
+                        },
+                        },
+                     }}
+                   />
+                </div>
             </SignedIn>
 
      </div>

@@ -8,7 +8,7 @@ interface props {
   descriptionStyle?: string;
 }
 
-const StudentDataCard = ({ title, body, cardStyle, headingStyle, descriptionStyle }: props) => {
+const StudentDataCard = ({ title, body, cardStyle = "", headingStyle = "", descriptionStyle = "" }: props) => {
   const description = useMemo(() => {
     return body.map((elem, index) => {
       return <p key={index}>{elem}</p>;

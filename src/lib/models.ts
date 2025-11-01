@@ -30,7 +30,7 @@ export const studentDetails = new mongoose.Schema({
     required: true,
   },
 });
-export const studentModel = mongoose.model("Student", studentDetails);
+export const studentModel =mongoose.models.Student || mongoose.model("Student", studentDetails);
 
 export const coachDetails = new mongoose.Schema({
   approved: {
@@ -66,7 +66,7 @@ export const coachDetails = new mongoose.Schema({
     required: true,
   },
 });
-export const coachModel = mongoose.model("Coach", coachDetails);
+export const coachModel = mongoose.models.Coach || mongoose.model("Coach", coachDetails);
 
 export const eventSchema = new mongoose.Schema({
   organizer: {
@@ -95,4 +95,4 @@ export const eventSchema = new mongoose.Schema({
     required: true,
   },
 });
-export const eventModel = mongoose.model("Event", eventSchema);
+export const eventModel = mongoose.models.Event || mongoose.model("Event", eventSchema);

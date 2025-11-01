@@ -1,8 +1,9 @@
 "use client";
-
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
+
+import { FcGoogle } from "react-icons/fc";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Page = () => {
@@ -20,6 +21,17 @@ const Page = () => {
         <div className="w-full md:w-1/2 bg-white p-10 md:p-14">
           <h2 className="text-3xl font-bold text-gray-800 mb-2">Sign up to Y-Ultimate</h2>
           <form className="mt-8 space-y-5">
+            {/* Continue using google button */}
+            <div className="mt-4">
+              <button
+                type="button"
+                className="w-full bg-white border border-gray-300 text-gray-700 p-3 rounded-xl font-semibold text-lg flex items-center justify-center hover:bg-gray-50 transition duration-300 shadow-sm hover:shadow-md gap-x-5"
+              >
+                <FcGoogle />
+                Continue with Google
+              </button>
+            </div>
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email

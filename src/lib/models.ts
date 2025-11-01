@@ -1,43 +1,47 @@
 import mongoose from "mongoose";
 
-export const studentDetails = new mongoose.Schema({
-  approved: {
-    type: Boolean,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  age: {
-    type: Number,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  state: {
-    type: String,
-    required: true,
-  },
-});
-export const studentModel =mongoose.models.Student || mongoose.model("Student", studentDetails);
+// export const studentDetails = new mongoose.Schema({
+//   approved: {
+//     type: Boolean,
+//     required: true,
+//   },
+//   name: {
+//     type: String,
+//     required: true,
+//   },
+//   password: {
+//     type: String,
+//     required: true,
+//   },
+//   age: {
+//     type: Number,
+//     required: true,
+//   },
+//   address: {
+//     type: String,
+//     required: true,
+//   },
+//   city: {
+//     type: String,
+//     required: true,
+//   },
+//   state: {
+//     type: String,
+//     required: true,
+//   },
+// });
+// export const studentModel =mongoose.models.Student || mongoose.model("Student", studentDetails);
 
-export const coachDetails = new mongoose.Schema({
+export const accountDetails = new mongoose.Schema({
   approved: {
     type: Boolean,
     required: true,
   },
   name: {
+    type: String,
+    required: true,
+  },
+  email: {
     type: String,
     required: true,
   },
@@ -58,6 +62,10 @@ export const coachDetails = new mongoose.Schema({
     required: true,
   },
   state: {
+    type: String,
+    required: true,
+  },
+  type: {
     type: String,
     required: true,
   },
@@ -65,8 +73,12 @@ export const coachDetails = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profile: {
+    type: String,
+    required: false,
+  },
 });
-export const coachModel = mongoose.models.Coach || mongoose.model("Coach", coachDetails);
+export const accountModel = mongoose.models.Account || mongoose.model("Account", accountDetails);
 
 export const eventSchema = new mongoose.Schema({
   organizer: {

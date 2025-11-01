@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import ButtonDefault from "./buttonDefault";
@@ -14,7 +14,7 @@ import ButtonDefault from "./buttonDefault";
 //   throw new Error("Function not implemented.");
 // }
 
-function Navbar() {
+const Navbar = () => {
   return (
     <div className="flex sticky h-25 items-center justify-between bg-primary px-6">
       <Link href={"/"}>
@@ -60,6 +60,6 @@ function Navbar() {
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;

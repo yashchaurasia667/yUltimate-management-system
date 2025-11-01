@@ -12,7 +12,7 @@ interface props {
 
 const EventCard = ({ name, description, organizer, date, type, src }: props) => {
   return (
-    <div className="rounded-lg border border-secondary inline-block max-w-[450px] w-1/4 overflow-hidden">
+    <div className="rounded-lg border border-secondary inline-block max-w-[450px] w-1/4 overflow-hidden cursor-pointer hover:border-2 hover:scale-[102%] transition-all">
       <span className="w-full">
         <Image src={src} alt={name} width={100} height={100} loading="lazy" className="w-full" />
       </span>

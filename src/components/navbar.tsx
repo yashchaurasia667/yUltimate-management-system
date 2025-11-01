@@ -1,18 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-// import { redirect } from "next/navigation";
-
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import ButtonDefault from "./buttonDefault";
-
-// const rdr = () => {
-//   redirect("/");
-// };
-
-// function resdirect(arg0: string) {
-//   throw new Error("Function not implemented.");
-// }
 
 const Navbar = () => {
   return (
@@ -30,26 +19,17 @@ const Navbar = () => {
 
       <div className="">
         <SignedOut>
-            <SignUpButton>
-          
-            <button
-                className="text-text font-medium bg-white text-lg px-6 py-3 outline-none cursor-pointer hover:font-semibold hover:scale-105 transition-all  rounded-full !bg-[#f0dce4]"
-              >
-                Sign Up
+          <SignUpButton>
+            <button className="text-text font-medium text-lg px-6 py-3 outline-none cursor-pointer hover:font-semibold hover:scale-105 transition-all  rounded-full bg-[#f0dce4]">
+              Sign Up
             </button>
-
           </SignUpButton>
 
-          <SignInButton >
-            
-              <button
-                className="text-text font-medium bg-white text-lg px-6 py-3 outline-none cursor-pointer hover:font-semibold hover:scale-105 transition-all rounded-full mx-3"
-              >
-                Login
-              </button>
-            
+          <SignInButton>
+            <button className="text-text font-medium bg-white text-lg px-6 py-3 outline-none cursor-pointer hover:font-semibold hover:scale-105 transition-all rounded-full mx-3">
+              Login
+            </button>
           </SignInButton>
-
         </SignedOut>
         <SignedIn>
           <div className="h-[30px] mb-7">

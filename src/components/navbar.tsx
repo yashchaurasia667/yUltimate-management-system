@@ -63,7 +63,7 @@ const Navbar = () => {
                   userButtonAvatarImage: {
                     width: "100%",
                     height: "100%",
-                    borderRadius: "8px", // optional: round or square
+                    borderRadius: "8px",
                   },
                 },
               }}

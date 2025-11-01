@@ -44,8 +44,10 @@ const Page = () => {
         // Handle other statuses if needed
         seterror("Sign in incomplete. Please try again.");
       }
-    } catch (error: any) {
-      seterror(error?.errors?.[0]?.message || "Sign in failed");
+    } catch (error) {
+      if (error instanceof Error) {
+        seterror(error.message || "Sign in failed");
+      }
       console.log(JSON.stringify(error, null, 2));
     } finally {
       setIsLoading(false);
@@ -83,9 +85,9 @@ const Page = () => {
             </div>
 
             <div className="relative flex items-center">
-              <div className="flex-grow border-t border-gray-300"></div>
-              <span className="flex-shrink mx-4 text-gray-400">or</span>
-              <div className="flex-grow border-t border-gray-300"></div>
+              <div className="grow border-t border-gray-300"></div>
+              <span className="shrink mx-4 text-gray-400">or</span>
+              <div className="grow border-t border-gray-300"></div>
             </div>
 
             <div>

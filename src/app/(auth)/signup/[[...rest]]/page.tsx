@@ -85,8 +85,10 @@ const Page = () => {
       });
 
       setpendingVerification(true);
-    } catch (error: any) {
-      seterror(error?.errors?.[0]?.message || "Sign up failed");
+    } catch (error) {
+      if (error instanceof Error) {
+        seterror(error.message || "Sign up failed");
+      }
       console.log(JSON.stringify(error, null, 2));
     } finally {
       setIsLoading(false);
@@ -110,7 +112,7 @@ const Page = () => {
 
           <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Check Your Email</h2>
 
-          <p className="text-gray-600 text-center mb-2 min-h-[3rem]">
+          <p className="text-gray-600 text-center mb-2 min-h-12">
             {typewriterText}
             {typewriterText.length < fullText.length && <span className="animate-pulse">|</span>}
           </p>
@@ -161,9 +163,9 @@ const Page = () => {
             </div>
 
             <div className="relative flex items-center">
-              <div className="flex-grow border-t border-gray-300"></div>
-              <span className="flex-shrink mx-4 text-gray-400">or</span>
-              <div className="flex-grow border-t border-gray-300"></div>
+              <div className="grow border-t border-gray-300"></div>
+              <span className="shrink mx-4 text-gray-400">or</span>
+              <div className="grow border-t border-gray-300"></div>
             </div>
 
             <div>

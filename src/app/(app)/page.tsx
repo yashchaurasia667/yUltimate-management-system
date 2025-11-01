@@ -1,12 +1,10 @@
 import StudentDataCard from "@/components/studentDataCard";
-import Navbar from "../components/navbar";
-import EventCard from "../components/eventCard";
+import EventCard from "@/components/eventCard";
 
 const page = () => {
   const assesments = ["Chemistry: Pending", "Physics: 1/4"];
   return (
     <>
-      <Navbar />
       <div className="mt-8">
         <StudentDataCard title="Assesment Status" body={assesments} cardStyle="m-5" />
         <EventCard

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "yutlimate",
@@ -15,10 +15,7 @@ export default function RootLayout({
   return (
     <ClerkProvider signInUrl="/login" signUpUrl="/signup" afterSignOutUrl={"/"} >
       <html lang="en">
-        <body>
-          {/* <Navbar /> */}
-          {children}
-        </body>
+        <body>{children}</body>
       </html>
     </ClerkProvider>
   );

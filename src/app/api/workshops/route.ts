@@ -22,7 +22,3 @@ export async function POST(request: Request) {
     return Response.json({ sucess: false, message: `internal serval error: ${error}` });
   }
 }
-
-export async function GET(request: Request) {
-  return Response.json({ sucess: true, message: "from get" });
-}

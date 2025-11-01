@@ -30,14 +30,27 @@ const Navbar = () => {
 
       <div className="">
         <SignedOut>
-          <SignUpButton mode="redirect">
-            <ButtonDefault text="Sign Up" className="rounded-full !bg-[#f0dce4]" />
-          </SignUpButton>
-          <SignInButton>
-            <ButtonDefault text="Login" className="rounded-full mx-3" />
-          </SignInButton>
-        </SignedOut>
+            <SignUpButton>
+          
+            <button
+                className="text-text font-medium bg-white text-lg px-6 py-3 outline-none cursor-pointer hover:font-semibold hover:scale-105 transition-all  rounded-full !bg-[#f0dce4]"
+              >
+                Sign Up
+            </button>
 
+          </SignUpButton>
+
+          <SignInButton >
+            
+              <button
+                className="text-text font-medium bg-white text-lg px-6 py-3 outline-none cursor-pointer hover:font-semibold hover:scale-105 transition-all rounded-full mx-3"
+              >
+                Login
+              </button>
+            
+          </SignInButton>
+
+        </SignedOut>
         <SignedIn>
           <div className="h-[30px] mb-7">
             <UserButton

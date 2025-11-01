@@ -4,6 +4,8 @@
 
 - [Figma Design](#figma-design)
 - [API Routes](#api-routes)
+- [Getting Started](#getting-started)
+- [Screenshots](#screenshots)
 
 ## Figma Design
 
@@ -29,3 +31,9 @@ $ npm run dev
 ```
 
 view the website running at http://localhost:3000/
+
+## Screenshots
+
+![signup](./screenshots/signup.png)
+![eventCard](./screenshots/eventCard.png)
+![profilePrototype](./screenshots/profilePrototype.png)

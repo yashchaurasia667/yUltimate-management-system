@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider signInUrl="/login" signUpUrl="/signup" afterSignOutUrl={"/"}>
+    <ClerkProvider signInUrl="/login" signUpUrl="/signup" afterSignOutUrl={"/"} >
       <html lang="en">
         <body>
           {/* <Navbar /> */}
@@ -23,3 +23,5 @@ export default function RootLayout({
     </ClerkProvider>
   );
 }
+
+// signInUrl="/login" signUpUrl="/signup" afterSignOutUrl={"/"}

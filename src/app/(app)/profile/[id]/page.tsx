@@ -42,8 +42,8 @@ const ParticipationHistory = () => (
 export default function App() {
   return (
     <div className="bg-gray-100 min-h-screen">
-      <main className="max-w-5xl mx-auto p-4 md:p-8">
-        <ProfileHeader />
+      <main className="md:max-w-7xl w-full mx-auto md:p-8">
+        <ProfileHeader userName={"User Name"} attendance={90} profileUrl={"/logo.png"} type={"student"} />
         <Navigation />
         <ParticipationHistory />
       </main>

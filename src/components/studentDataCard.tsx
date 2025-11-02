@@ -25,7 +25,7 @@ const StudentDataCard = ({ title }: props) => {
   //   </div>
   // );
   return (
-    <button className="bg-blue-50 text-gray-700 font-semibold p-5 rounded-lg shadow-sm hover:bg-blue-100 hover:-translate-y-0.5 transform transition flex justify-between items-center text-left">
+    <button className="bg-secondary-faded text-gray-700 font-semibold p-5 rounded-lg shadow-sm hover:bg-blue-100 hover:-translate-y-0.5 transform transition flex justify-between items-center text-left">
       <span>{title}</span>
       <FiArrowUpRight size={20} className="text-gray-500" />
     </button>

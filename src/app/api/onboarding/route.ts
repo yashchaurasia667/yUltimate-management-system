@@ -3,9 +3,7 @@ import { accountModel } from "@/lib/models";
 import { currentUser } from '@clerk/nextjs/server'
 
 type details = {
-  
   name: string;
-  password: string;
   age: number;
   address: string;
   city: string;
@@ -16,8 +14,8 @@ type details = {
 };
 
 export async function POST(req: Request) {
-  const { name, password, age, address, city, state, type, course, profileUrl }: details = await req.json();
-  if (!name || !password || !age || !address || !city || !state || !type || !course || !profileUrl) {
+  const { name, age, address, city, state, type, course }: details = await req.json();
+  if (!name || !age || !address || !city || !state || !type || !course) {
     return Response.json({ success: false, message: "Bad Request: missing details" }, { status: 400 });
   }
 
@@ -29,27 +27,25 @@ export async function POST(req: Request) {
         approved: false,
         name: name,
         email: "kratikmishra@gmail.com",
-        password: password,
         age: age,
         address: address,
         city: city,
         state: state,
         type: "coach",
         course: course,
-        profile: profileUrl ? profileUrl : "",
+        profile: "github.com/yupAyush",
       });
     } else {
       user = await accountModel.create({
         approved: false,
         name: name,
         email: "kraticjdhkmishra@gmail.com",
-        password: password,
         age: age,
         address: address,
         city: city,
         state: state,
         type: "student",
-        profile: profileUrl ? profileUrl : "",
+        profile: "github.com/yupAyush",
       });
     }
 

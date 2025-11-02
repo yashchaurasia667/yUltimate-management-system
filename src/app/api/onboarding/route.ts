@@ -1,7 +1,9 @@
 import dbconnect from "@/lib/dbconnect";
 import { accountModel } from "@/lib/models";
+import { currentUser } from '@clerk/nextjs/server'
 
 type details = {
+  
   name: string;
   password: string;
   age: number;
@@ -26,6 +28,7 @@ export async function POST(req: Request) {
       user = await accountModel.create({
         approved: false,
         name: name,
+        email: "kratikmishra@gmail.com",
         password: password,
         age: age,
         address: address,
@@ -39,6 +42,7 @@ export async function POST(req: Request) {
       user = await accountModel.create({
         approved: false,
         name: name,
+        email: "kraticjdhkmishra@gmail.com",
         password: password,
         age: age,
         address: address,

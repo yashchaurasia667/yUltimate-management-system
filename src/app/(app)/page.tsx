@@ -6,7 +6,7 @@ const page = () => {
   return (
     <>
       <div className="mt-8">
-        <StudentDataCard title="Assesment Status" body={assesments} cardStyle="m-5" />
+        <StudentDataCard title="Assesment Status"  cardStyle="m-5" />
         <EventCard
           name="Softball"
           description="Our mission is to impart life skills education in children especially those from lesser privileged socio-economic backgrounds,through the sport of Ultimate Frisbee."

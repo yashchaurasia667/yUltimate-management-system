@@ -22,6 +22,10 @@ export async function POST(req: Request) {
     await dbconnect();
     let user;
     if (type == "coach") {
+      if (!course) {
+        return Response.json({ success: false, message: "Bad Request: missing details" }, { status: 400 });
+      }
+
       user = await accountModel.create({
         approved: false,
         name: name,
@@ -43,6 +47,7 @@ export async function POST(req: Request) {
         address: address,
         city: city,
         state: state,
+        course: "gooning 101",
         type: "student",
         profile: "github.com/yupAyush",
       });
@@ -54,6 +59,7 @@ export async function POST(req: Request) {
 
     return Response.json({ success: true, message: "Account details saved, now redirecting to /profile" });
   } catch (error) {
+    console.log(error);
     return Response.json({ success: false, message: `Internal Server Error: ${error}` }, { status: 500 });
   }
 }

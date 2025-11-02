@@ -1,19 +1,17 @@
 import dbconnect from "@/lib/dbconnect";
 import { accountModel } from "@/lib/models";
 
-type params = {
-  id: string;
-};
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
 
-export async function GET(req: Request, { params }: { params: params }) {
-  const { id } = params;
   if (!id) {
-    return Response.json({ success: false, message: "id is required to fetch user details" });
+    return Response.json({ success: false, message: "id is required to fetch user details" }, { status: 400 });
   }
 
   try {
     await dbconnect();
-    const user = await accountModel.findById(id).select("-password");
+    const user = await accountModel.findById(id);
     if (user) {
       return Response.json({ success: true, message: user });
     } else {

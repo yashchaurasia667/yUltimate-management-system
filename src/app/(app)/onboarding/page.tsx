@@ -27,6 +27,9 @@ const Page = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const inputStyle = "border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none";
+  const labelStyle = "text-gray-700 mb-1 font-semibold text-lg";
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");

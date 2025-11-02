@@ -1,6 +1,22 @@
 "use client";
-import React from "react";
 import Image from "next/image";
+
+type eventType = {
+  id: number;
+  img: string;
+  title: string;
+  description: string;
+  date: string;
+};
+
+type partnerType = {
+  id: number;
+  name: string;
+  name2: string | null;
+  color: string;
+  style: string;
+};
+
 // --- Data Stubs ---
 const eventsData = [
   {
@@ -56,7 +72,7 @@ const partnersData = [
 /**
  * Reusable component for displaying an event card.
  */
-const EventCard = ({ event }: any) => (
+const EventCard = ({ event }: { event: eventType }) => (
   <div className="shrink-0 w-72 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-0.5 cursor-pointer border border-gray-100">
     {/* Image */}
     <img src={event.img} alt={event.title} className="w-full h-36 object-cover rounded-t-xl" />
@@ -88,7 +104,7 @@ const EventCard = ({ event }: any) => (
 /**
  * Component to render stylized partner text logos
  */
-const PartnerLogo = ({ partner }: any) => (
+const PartnerLogo = ({ partner }: { partner: partnerType }) => (
   <div className="w-32 h-20 sm:w-40 sm:h-24 flex items-center justify-center p-2 rounded-xl bg-white border border-gray-100 hover:border-indigo-300 transition-all duration-300 shadow-sm">
     <div className={`text-center leading-none ${partner.color} ${partner.style}`}>
       <span className="block">{partner.name}</span>
@@ -100,7 +116,7 @@ const PartnerLogo = ({ partner }: any) => (
 /**
  * The main Next.js Page component.
  */
-const Main = () => {
+const Hero = () => {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="relative h-[380px] sm:h-[450px] overflow-hidden mx-4 sm:mx-8 md:mx-12 lg:mx-20 rounded-xl mt-4">
@@ -111,7 +127,7 @@ const Main = () => {
           priority
           className="object-cover brightness-[0.7] contrast-[1.1]"
         />
-        
+
         <div className="relative z-10 flex items-center justify-center h-full text-center p-6">
           <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold max-w-5xl leading-tight tracking-tight drop-shadow-lg">
             Our mission is to impart life skills education in children, especially those from lesser privileged
@@ -177,4 +193,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Hero;

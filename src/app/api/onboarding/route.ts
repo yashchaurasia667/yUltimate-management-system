@@ -1,11 +1,10 @@
 import dbconnect from "@/lib/dbconnect";
 import { accountModel } from "@/lib/models";
-import { currentUser } from '@clerk/nextjs/server'
+// import { currentUser } from "@clerk/nextjs/server";
 
 type details = {
-  
   name: string;
-  password: string;
+  // password: string;
   age: number;
   address: string;
   city: string;
@@ -16,8 +15,11 @@ type details = {
 };
 
 export async function POST(req: Request) {
-  const { name, password, age, address, city, state, type, course, profileUrl }: details = await req.json();
-  if (!name || !password || !age || !address || !city || !state || !type || !course || !profileUrl) {
+  // const { name, age, address, city, state, type, course, profileUrl }: details = await req.json();
+  const data = await req.json();
+  console.log(data);
+  const { name, age, address, city, state, type, course, profileUrl }: details = data;
+  if (!name || !age || !address || !city || !state || !type) {
     return Response.json({ success: false, message: "Bad Request: missing details" }, { status: 400 });
   }
 
@@ -25,11 +27,13 @@ export async function POST(req: Request) {
     await dbconnect();
     let user;
     if (type == "coach") {
+      if (!course) {
+        return Response.json({ success: false, message: "Bad Request: missing details" }, { status: 400 });
+      }
+
       user = await accountModel.create({
         approved: false,
         name: name,
-        email: "kratikmishra@gmail.com",
-        password: password,
         age: age,
         address: address,
         city: city,
@@ -42,12 +46,11 @@ export async function POST(req: Request) {
       user = await accountModel.create({
         approved: false,
         name: name,
-        email: "kraticjdhkmishra@gmail.com",
-        password: password,
         age: age,
         address: address,
         city: city,
         state: state,
+        course: "gooning 101",
         type: "student",
         profile: profileUrl ? profileUrl : "",
       });
@@ -59,6 +62,7 @@ export async function POST(req: Request) {
 
     return Response.json({ success: true, message: "Account details saved, now redirecting to /profile" });
   } catch (error) {
+    console.log(error);
     return Response.json({ success: false, message: `Internal Server Error: ${error}` }, { status: 500 });
   }
 }

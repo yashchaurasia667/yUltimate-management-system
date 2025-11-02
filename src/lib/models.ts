@@ -43,12 +43,7 @@ export const accountDetails = new mongoose.Schema({
   },
   email: {
     type: String,
-    required:true
-    
-  },
-  password: {
-    type: String,
-    required: true,
+    required: false,
   },
   age: {
     type: Number,
@@ -69,16 +64,20 @@ export const accountDetails = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum:["student","coach"],
+    enum: ["student", "coach"],
   },
   course: {
     type: String,
-    required: function (){
-      return this.type==="coach";
+    required: function () {
+      return this.type === "coach";
     },
   },
   profile: {
     type: String,
+    required: false,
+  },
+  events: {
+    type: [mongoose.Schema.ObjectId],
     required: false,
   },
 });
@@ -112,3 +111,22 @@ export const eventSchema = new mongoose.Schema({
   },
 });
 export const eventModel = mongoose.models.Event || mongoose.model("Event", eventSchema);
+
+export const teamSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  size: {
+    type: Number,
+    required: true,
+  },
+  score: {
+    type: Number,
+    required: true,
+  },
+  members: {
+    type: [mongoose.Schema.ObjectId],
+    required: true,
+  },
+});

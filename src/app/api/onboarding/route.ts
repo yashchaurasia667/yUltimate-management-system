@@ -1,6 +1,5 @@
 import dbconnect from "@/lib/dbconnect";
 import { accountModel } from "@/lib/models";
-import { currentUser } from '@clerk/nextjs/server'
 
 type details = {
   name: string;

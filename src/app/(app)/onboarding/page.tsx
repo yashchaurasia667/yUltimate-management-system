@@ -1,11 +1,21 @@
 "use client";
 import { useState } from "react";
-// Removed: import { useRouter } from "next/navigation"; 
+// Removed: import { useRouter } from "next/navigation";
 import axios from "axios";
+
+type payloadType = {
+  name: string;
+  age: number;
+  address: string;
+  city: string;
+  state: string;
+  course?: string;
+  type: "coach" | "student";
+};
 
 const Page = () => {
   // Removed: const router = useRouter();
-  
+
   // State variables, fixing the typo for setAddress
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -24,13 +34,13 @@ const Page = () => {
 
     // Basic client-side validation
     if (!name || !address || !city || !state || !age || (type === "coach" && !course)) {
-        setError("Please fill out all required fields.");
-        setLoading(false);
-        return;
+      setError("Please fill out all required fields.");
+      setLoading(false);
+      return;
     }
 
     // Prepare data payload
-    const payload: any = {
+    const payload: payloadType = {
       name: name,
       age: parseInt(age, 10), // Convert age to number
       address: address,
@@ -42,8 +52,8 @@ const Page = () => {
     // Conditionally add course for coaches
     if (type === "coach") {
       payload.course = course;
-    }else {
-      payload.course="blah blah"
+    } else {
+      payload.course = "blah blah";
     }
 
     try {
@@ -55,15 +65,15 @@ const Page = () => {
 
       if (res.status === 200) {
         // Replaced router.push with standard window navigation for compatibility
-        window.location.href = "/"; 
+        window.location.href = "/";
       } else {
         // Handle non-200 responses if the API sends meaningful error codes
         setError(res.data?.message || "An unknown error occurred during submission.");
       }
-    } catch (err: any) {
+    } catch (err) {
       // Handle network or request errors
       // Use err.message for generic errors if response is undefined
-      setError(err.response?.data?.message || err.message || "Failed to connect to the API.");
+      if (err instanceof Error) setError(err.message || "Failed to connect to the API.");
     } finally {
       setLoading(false);
     }
@@ -79,7 +89,6 @@ const Page = () => {
 
         <form onSubmit={submit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
             {/* Name */}
             <div className="flex flex-col">
               <label htmlFor="name" className="text-gray-700 mb-1 font-medium">
@@ -155,16 +164,16 @@ const Page = () => {
                 required
               />
             </div>
-            
+
             {/* Type (Radio Group) */}
             <div className="flex flex-col pt-2">
               <label className="text-gray-700 mb-2 font-medium">Account Type</label>
               <div className="flex gap-8">
                 <label className="flex items-center gap-2 text-gray-700 cursor-pointer">
-                  <input 
-                    type="radio" 
-                    name="type" 
-                    value="coach" 
+                  <input
+                    type="radio"
+                    name="type"
+                    value="coach"
                     checked={type === "coach"}
                     onChange={() => setType("coach")}
                     className="text-[#457b9d] focus:ring-[#457b9d] h-4 w-4"
@@ -172,10 +181,10 @@ const Page = () => {
                   Coach
                 </label>
                 <label className="flex items-center gap-2 text-gray-700 cursor-pointer">
-                  <input 
-                    type="radio" 
-                    name="type" 
-                    value="student" 
+                  <input
+                    type="radio"
+                    name="type"
+                    value="student"
                     checked={type === "student"}
                     onChange={() => setType("student")}
                     className="text-[#457b9d] focus:ring-[#457b9d] h-4 w-4"
@@ -184,21 +193,21 @@ const Page = () => {
                 </label>
               </div>
             </div>
-            
+
             {/* Conditional Course Input for Coach */}
             {type === "coach" && (
               <div className="flex flex-col md:col-span-2">
                 <label htmlFor="course" className="text-gray-700 mb-1 font-medium">
                   Course/Expertise
                 </label>
-                <input 
+                <input
                   id="course"
-                  type="text" 
-                  value={course} 
+                  type="text"
+                  value={course}
                   onChange={(e) => setCourse(e.target.value)}
                   className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#457b9d] transition duration-150"
                   placeholder="e.g., Advanced Calculus, Full Stack Development"
-                  required={type === 'coach'}
+                  required={type === "coach"}
                 />
               </div>
             )}
@@ -217,10 +226,10 @@ const Page = () => {
               type="submit"
               disabled={loading}
               className={`w-full md:w-auto bg-[#1d3557] text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg transition-all transform hover:scale-105 ${
-                loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#457b9d]'
+                loading ? "opacity-70 cursor-not-allowed" : "hover:bg-[#457b9d]"
               }`}
             >
-              {loading ? 'Applying...' : 'Apply for Approval'}
+              {loading ? "Applying..." : "Apply for Approval"}
             </button>
           </div>
         </form>

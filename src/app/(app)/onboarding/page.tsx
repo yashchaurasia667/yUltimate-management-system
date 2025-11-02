@@ -1,4 +1,38 @@
+"use client";
+import axios from "axios";
+import { redirect } from "next/navigation";
+import React, { useState } from "react";
+
 const Page = () => {
+  const [name, setName] = useState("");
+  const [address, setAdderss] = useState("");
+  const [age, setAge] = useState(0);
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [type, setType] = useState<"coach" | "student">("student");
+  const [course, setCourse] = useState("");
+  const [error, setError] = useState("");
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    axios({
+      method: "POST",
+      url: "/api/onboarding",
+      data: {
+        name: name,
+        // password: password,
+        age: age,
+        address: address,
+        city: city,
+        state: state,
+        type: type,
+      },
+    }).then((res) => {
+      if (res.status === 200) redirect("/");
+      else setError(res.message);
+    });
+  };
+  
   return (
     <div className="min-h-screen flex pt-12 justify-center">
       <div className="rounded-xl shadow-lg w-[900px] h-[480px] p-6 outline-2 outline-[#dce4f7]">
@@ -77,6 +111,16 @@ const Page = () => {
               </label>
             </div>
           </div>
+          
+        {type === "coach" ? (
+        <div>
+          <label htmlFor="course">Course</label>
+          <input type="text" value={course} onChange={(e) => setCourse(e.target.value)} />
+        </div>
+      ) : (
+        ""
+      )}
+      {error === "" ? "" : <div>{error}</div>}
 
           {/* Button */}
           <div className="text-center pt-12">

@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider signInUrl="/login" signUpUrl="/signup" afterSignOutUrl={"/"} >
+    <ClerkProvider signInUrl="/login" signUpUrl="/signup" afterSignOutUrl={"/onboarding"} >
       <html lang="en">
         <body>{children}</body>
       </html>

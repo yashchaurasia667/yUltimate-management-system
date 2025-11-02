@@ -1,12 +1,12 @@
 import dbconnect from "@/lib/dbconnect";
 import { accountModel } from "@/lib/models";
 
-type req = {
+type params = {
   id: string;
 };
 
-export async function POST(req: Request) {
-  const { id }: req = await req.json();
+export async function GET(req: Request, { params }: { params: params }) {
+  const { id } = params;
   if (!id) {
     return Response.json({ success: false, message: "id is required to fetch user details" });
   }

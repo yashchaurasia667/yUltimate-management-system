@@ -15,11 +15,16 @@ type details = {
 
 export async function POST(req: Request) {
   const { name, password, age, address, city, state, type, course, profileUrl }: details = await req.json();
+  if (!name || !password || !age || !address || !city || !state || !type || !course || !profileUrl) {
+    return Response.json({ success: false, message: "Bad Request: missing details" }, { status: 400 });
+  }
+
   try {
     await dbconnect();
+    let user;
     if (type == "coach") {
-      await accountModel.create({
-        approved: true,
+      user = await accountModel.create({
+        approved: false,
         name: name,
         password: password,
         age: age,
@@ -31,8 +36,8 @@ export async function POST(req: Request) {
         profile: profileUrl ? profileUrl : "",
       });
     } else {
-      await accountModel.create({
-        approved: true,
+      user = await accountModel.create({
+        approved: false,
         name: name,
         password: password,
         age: age,
@@ -44,8 +49,12 @@ export async function POST(req: Request) {
       });
     }
 
+    if (!user) {
+      throw new Error("Failed to create user");
+    }
+
     return Response.json({ success: true, message: "Account details saved, now redirecting to /profile" });
   } catch (error) {
-    return Response.json({ success: false, message: `Internal Server Error: ${error}` });
+    return Response.json({ success: false, message: `Internal Server Error: ${error}` }, { status: 500 });
   }
 }

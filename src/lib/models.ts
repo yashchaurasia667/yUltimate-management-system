@@ -43,7 +43,8 @@ export const accountDetails = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    required:true
+    
   },
   password: {
     type: String,
@@ -68,10 +69,13 @@ export const accountDetails = new mongoose.Schema({
   type: {
     type: String,
     required: true,
+    enum:["student","coach"],
   },
   course: {
     type: String,
-    required: true,
+    required: function (){
+      return this.type==="coach";
+    },
   },
   profile: {
     type: String,

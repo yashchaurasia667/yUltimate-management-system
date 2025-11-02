@@ -43,8 +43,13 @@ export const accountDetails = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: false,
+    required:true
+    
   },
+  // password: {
+  //   type: String,
+  //   required: false,
+  // },
   age: {
     type: Number,
     required: true,
@@ -88,6 +93,7 @@ export const eventSchema = new mongoose.Schema({
     type: [mongoose.Schema.ObjectId],
     ref: "Coach",
     required: true,
+    
   },
   participants: {
     type: [mongoose.Schema.ObjectId],

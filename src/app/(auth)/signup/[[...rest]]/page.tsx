@@ -212,10 +212,12 @@ const Page = () => {
 
             <p className="text-gray-600 pt-4">
               Already have an account?{" "}
-              <Link href="/signin" className="text-secondary font-semibold hover:text-primary">
-                Sign in
+              <Link href="/login" className="text-secondary font-semibold hover:text-primary">
+                Login
               </Link>
             </p>
+
+            <div id="clerk-captcha" />
 
             <div>
               <button
@@ -226,7 +228,6 @@ const Page = () => {
                 {isLoading ? "Creating Account..." : "Sign Up"}
               </button>
             </div>
-            <div id="clerk-captcha" />
           </form>
         </div>
       </main>

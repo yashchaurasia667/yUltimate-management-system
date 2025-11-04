@@ -1,9 +1,23 @@
 "use client";
 
 import { useState, ChangeEvent, FormEvent, ReactNode, FC } from "react";
+import ButtonDefault from "../../../../components/buttonDefault";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
+import Link from "next/link";
+
 interface SvgProps {
   className?: string;
 }
+
+const FormField: FC<FormFieldProps> = ({ id, label, icon, children }) => (
+  <div className="mb-6">
+    <label htmlFor={id} className="flex items-center text-lg font-semibold text-gray-700 mb-2">
+      {icon}
+      <span className="ml-2">{label}</span>
+    </label>
+    {children}
+  </div>
+);
 
 const MdCalendarToday: FC<SvgProps> = ({ className }) => (
   <svg
@@ -185,136 +199,136 @@ export default function CreateEventPage() {
   };
 
   // Helper component for form fields, typed with our props interface
-  const FormField: FC<FormFieldProps> = ({ id, label, icon, children }) => (
-    <div className="mb-6">
-      <label htmlFor={id} className="flex items-center text-lg font-semibold text-gray-700 mb-2">
-        {icon}
-        <span className="ml-2">{label}</span>
-      </label>
-      {children}
-    </div>
-  );
-
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-      <main className="w-full max-w-2xl">
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 text-center">Create a New Event</h1>
+    <>
+      <SignedIn>
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+          <main className="w-full max-w-2xl">
+            <div className="bg-white rounded-lg shadow-xl p-8">
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 text-center">Create a New Event</h1>
 
-          <form onSubmit={handleSubmit}>
-            {/* Event Name */}
-            <FormField id="name" label="Event Name" icon={<MdTextFields className="text-blue-600 w-6 h-6" />}>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={eventData.name}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="e.g., Nexus Code Conference 2025"
-                required
-              />
-            </FormField>
+              <form onSubmit={handleSubmit}>
+                {/* Event Name */}
+                <FormField id="name" label="Event Name" icon={<MdTextFields className="text-blue-600 w-6 h-6" />}>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={eventData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g., Yultimate Code Conference 2025"
+                    required
+                  />
+                </FormField>
 
-            {/* Description */}
-            <FormField id="description" label="Description" icon={<MdNotes className="text-blue-600 w-6 h-6" />}>
-              <textarea
-                id="description"
-                name="description"
-                value={eventData.description}
-                onChange={handleChange}
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Tell us what your event is about..."
-                required
-              ></textarea>
-            </FormField>
+                {/* Description */}
+                <FormField id="description" label="Description" icon={<MdNotes className="text-blue-600 w-6 h-6" />}>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={eventData.description}
+                    onChange={handleChange}
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Tell us what your event is about..."
+                    required
+                  ></textarea>
+                </FormField>
 
-            {/* Grid for details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Event Type */}
-              <FormField id="type" label="Event Type" icon={<MdPeople className="text-blue-600 w-6 h-6" />}>
-                <select
-                  id="type"
-                  name="type"
-                  value={eventData.type}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                >
-                  <option value="individual">Individual</option>
-                  <option value="team">Team</option>
-                </select>
-              </FormField>
+                {/* Grid for details */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Event Type */}
+                  <FormField id="type" label="Event Type" icon={<MdPeople className="text-blue-600 w-6 h-6" />}>
+                    <select
+                      id="type"
+                      name="type"
+                      value={eventData.type}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    >
+                      <option value="individual">Individual</option>
+                      <option value="team">Team</option>
+                    </select>
+                  </FormField>
 
-              {/* Organizer Name */}
-              <FormField id="organizer" label="Organizer" icon={<MdBusiness className="text-blue-600 w-6 h-6" />}>
-                <input
-                  type="text"
-                  id="organizer"
-                  name="organizer"
-                  value={eventData.organizer}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="e.g., TechGuild Solutions"
-                  required
-                />
-              </FormField>
+                  {/* Organizer Name */}
+                  <FormField id="organizer" label="Organizer" icon={<MdBusiness className="text-blue-600 w-6 h-6" />}>
+                    <input
+                      type="text"
+                      id="organizer"
+                      name="organizer"
+                      value={eventData.organizer}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="e.g., TechGuild Solutions"
+                      required
+                    />
+                  </FormField>
 
-              {/* Date */}
-              <FormField id="date" label="Date" icon={<MdCalendarToday className="text-blue-600 w-6 h-6" />}>
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  value={eventData.date}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </FormField>
+                  {/* Date */}
+                  <FormField id="date" label="Date" icon={<MdCalendarToday className="text-blue-600 w-6 h-6" />}>
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      value={eventData.date}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    />
+                  </FormField>
 
-              {/* Time */}
-              <FormField id="time" label="Time" icon={<MdAccessTime className="text-blue-600 w-6 h-6" />}>
-                <input
-                  type="time"
-                  id="time"
-                  name="time"
-                  value={eventData.time}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </FormField>
+                  {/* Time */}
+                  <FormField id="time" label="Time" icon={<MdAccessTime className="text-blue-600 w-6 h-6" />}>
+                    <input
+                      type="time"
+                      id="time"
+                      name="time"
+                      value={eventData.time}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    />
+                  </FormField>
+                </div>
+
+                {/* Venue */}
+                <FormField id="venue" label="Venue" icon={<MdLocationOn className="text-blue-600 w-6 h-6" />}>
+                  <input
+                    type="text"
+                    id="venue"
+                    name="venue"
+                    value={eventData.venue}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g., The Digital Forum, 123 Tech Street"
+                    required
+                  />
+                </FormField>
+
+                {/* Submit Button */}
+                <div className="text-center mt-8">
+                  <ButtonDefault
+                    text={"Create Event"}
+                    submitType={true}
+                    className="!bg-primary !text-background font-medium rounded-md"
+                  />
+                </div>
+              </form>
             </div>
-
-            {/* Venue */}
-            <FormField id="venue" label="Venue" icon={<MdLocationOn className="text-blue-600 w-6 h-6" />}>
-              <input
-                type="text"
-                id="venue"
-                name="venue"
-                value={eventData.venue}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="e.g., The Digital Forum, 123 Tech Street"
-                required
-              />
-            </FormField>
-
-            {/* Submit Button */}
-            <div className="text-center mt-8">
-              <button
-                type="submit"
-                className="w-full md:w-auto bg-blue-600 text-white font-bold py-3 px-10 rounded-full text-lg 
-                           hover:bg-blue-700 transition duration-300 ease-in-out
-                           transform hover:scale-105 shadow-lg"
-              >
-                Create Event
-              </button>
-            </div>
-          </form>
+          </main>
         </div>
-      </main>
-    </div>
+      </SignedIn>
+
+      <SignedOut>
+        <div className="flex flex-col justify-center items-center">
+          <div className="text-3xl font-medium">Please sign in to access this page</div>
+          <Link href={"/login"} className="bg-primary text-xl font-medium rounded-md text-background px-4 py-2">
+            Login
+          </Link>
+        </div>
+      </SignedOut>
+    </>
   );
 }
